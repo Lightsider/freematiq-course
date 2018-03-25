@@ -1,0 +1,82 @@
+C:\freematiq\course\basic>php requirements.php
+
+Yii Application Requirement Checker
+
+This script checks if your server configuration meets the requirements
+for running Yii application.
+It checks if the server is running the right version of PHP,
+if appropriate PHP extensions have been loaded, and if php.ini file settings are correct.
+
+Check conclusion:
+-----------------
+
+PHP version: OK
+
+Reflection extension: OK
+
+PCRE extension: OK
+
+SPL extension: OK
+
+Ctype extension: OK
+
+MBString extension: OK
+
+OpenSSL extension: OK
+
+Intl extension: WARNING!!!
+Required by: Internationalization support
+Memo: PHP Intl extension 1.0.2 or higher is required when you want to use advanced parameters formatting
+        in Yii::t(), non-latin languages with Inflector::slug(),
+        IDN-feature of
+        EmailValidator or UrlValidator or the yii\i18n\Formatter class.
+
+ICU version: WARNING!!!
+Required by: Internationalization support
+Memo: ICU 49.0 or higher is required when you want to use # placeholder in plural rules
+        (for example, plural in
+
+        Formatter::asRelativeTime()) in the yii\i18n\Formatter class. Your current ICU version is (ICU is missing).
+
+ICU Data version: WARNING!!!
+Required by: Internationalization support
+Memo: ICU Data 49.1 or higher is required when you want to use # placeholder in plural rules
+        (for example, plural in
+
+        Formatter::asRelativeTime()) in the yii\i18n\Formatter class. Your current ICU Data version is (ICU Data is missing).
+
+Fileinfo extension: OK
+
+DOM extension: OK
+
+IPv6 support: OK
+
+PDO extension: OK
+
+PDO SQLite extension: OK
+
+PDO MySQL extension: OK
+
+PDO PostgreSQL extension: WARNING!!!
+Required by: All DB-related classes
+Memo: Required for PostgreSQL database.
+
+Memcache extension: WARNING!!!
+Required by: MemCache
+
+GD PHP extension with FreeType support: OK
+
+ImageMagick PHP extension with PNG support: WARNING!!!
+Required by: Captcha
+Memo: Either GD PHP extension with FreeType support or ImageMagick PHP extension with PNG support is required for image CAPTCHA.
+
+Expose PHP: WARNING!!!
+Required by: Security reasons
+Memo: "expose_php" should be disabled at php.ini
+
+PHP allow url include: OK
+
+PHP mail SMTP: OK
+
+------------------------------------------
+Errors: 0   Warnings: 7   Total checks: 23
