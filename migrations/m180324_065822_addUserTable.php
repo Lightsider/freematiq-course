@@ -15,7 +15,7 @@ class m180324_065822_addUserTable extends Migration
         $this->createTable('user',[
             'id' => $this->primaryKey()->comment('Первичный ключ'),
             'login' => $this->string(255)->notNull()->unique(),
-            'password_hash' => $this->string(32)->notNull(),
+            'password_hash' => $this->string(60)->notNull(),
             'status' => "ENUM('admin', 'user')",
             'score'=> $this->integer()->defaultValue(0),
             'image'=>$this->string(255),

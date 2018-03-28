@@ -65,7 +65,7 @@ class GameController extends Controller
     {
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl() . "game/tasks");
+            return $this->redirect(["game/tasks"]);
         }
         return $this->render('login', [
             'model' => $model,
@@ -75,7 +75,7 @@ class GameController extends Controller
     public function actionLogout()
     {
             Yii::$app->user->logout();
-            return Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl() . "game/login");
+            return $this->redirect(["game/login"]);
     }
 
     /**
@@ -86,7 +86,7 @@ class GameController extends Controller
     public function actionTasks()
     {
         if (Yii::$app->user->isGuest) {
-            return Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl() . "game/login");
+            return $this->redirect(["game/login"]);
         }
         return $this->render('tasks');
     }
@@ -99,7 +99,7 @@ class GameController extends Controller
     public function actionResult()
     {
         if (Yii::$app->user->isGuest) {
-            return Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl()."game/login");
+            return $this->redirect(["game/login"]);
         }
         return $this->render('result');
     }
@@ -107,9 +107,9 @@ class GameController extends Controller
     public function actionIndex()
     {
         if (!Yii::$app->user->isGuest) {
-            return Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl() . "game/tasks");
+            return $this->redirect(["game/tasks"]);
         } else
-            return Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl() . "game/login");
+            return $this->redirect(["game/login"]);
     }
 
     /*
@@ -118,7 +118,7 @@ class GameController extends Controller
     public function actionRegister()
     {
         if (!Yii::$app->user->isGuest) {
-            return Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl() . "game/tasks");
+            return $this->redirect(["game/tasks"]);
         }
 
         $model = new \app\models\RegisterForm();
@@ -126,7 +126,7 @@ class GameController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->register()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl() . "game/tasks");
+                    return $this->redirect(["game/tasks"]);
                 }
             }
         }

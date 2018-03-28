@@ -43,8 +43,6 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                var_dump(!$user,!$user->validatePassword($this->password),\Yii::$app->security->generatePasswordHash($this->password));
-                exit;
                 $this->addError($attribute, 'Неверный логин или пароль');
             }
         }
