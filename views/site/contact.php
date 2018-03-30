@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-<?php if(1==0){?>
+<?php /*if(1==0){?>
 <div class="site-contact">
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -82,4 +82,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php endif; ?>
 </div>
-<?php }?>
+<?php }*/?>
