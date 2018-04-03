@@ -40,15 +40,15 @@ class m180324_065843_addTasksTable extends Migration
     {
         $this->createTable('tasks',[
             'id' => $this->primaryKey()->comment('Первичный ключ'),
-            'id_category'=> $this->tinyInteger(),
+            'id_category'=> $this->integer(),
             'flag' => $this->string(255)->notNull()->unique(),
             'score'=> $this->integer(),
             'title'=>$this->string(255),
             'description'=>$this->text()
         ]);
 
-       /* $this->addForeignKey("id_tasks_category","tasks","id_category","category",
-            "id","CASCADE","CASCADE");*/
+       $this->addForeignKey("id_tasks_category","tasks","id_category","category",
+            "id","CASCADE","CASCADE");
 
 
         return true;
@@ -56,7 +56,7 @@ class m180324_065843_addTasksTable extends Migration
 
     public function down()
     {
-       /* $this->dropForeignKey("id_tasks_category","tasks");*/
+        $this->dropForeignKey("id_tasks_category","tasks");
 
         $this->dropTable('tasks');
 

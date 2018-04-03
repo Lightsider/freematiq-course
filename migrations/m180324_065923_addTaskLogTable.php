@@ -47,18 +47,18 @@ class m180324_065923_addTaskLogTable extends Migration
             'result'=>"ENUM('false', 'true')"
         ]);
 
-        /*$this->addForeignKey("id_log_user","taskLog","id_user","user","id"
+        $this->addForeignKey("id_log_user","taskLog","id_user","user","id"
         ,"CASCADE","CASCADE");
         $this->addForeignKey("id_log_task","taskLog","id_task","tasks","id"
-        ,"CASCADE","CASCADE");*/
+        ,"CASCADE","CASCADE");
 
         return true;
     }
 
     public function down()
     {
-       /* $this->dropForeignKey("id_log_task","taskLog");
-        $this->dropForeignKey("id_log_user","taskLog");*/
+        $this->dropForeignKey("id_log_task","taskLog");
+        $this->dropForeignKey("id_log_user","taskLog");
 
         $this->dropTable('taskLog');
 

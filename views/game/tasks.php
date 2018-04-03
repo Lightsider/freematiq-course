@@ -9,25 +9,16 @@ $this->title = 'Задания';
 <div class="sidebar">
     <h2> Категории: </h2>
     <ul>
+        <?php foreach($category as $i=>$cat):?>
 
-        <li class="sideline" id="all" onclick="view('all')" style="background-color: rgb(2, 149, 255); color: white;">
-            Все категории
+        <?php if($i===0):?>
+        <li class="sideline" id="all" onclick="view('<?= Html::encode($cat["title"])?>')" style="background-color: rgb(2, 149, 255); color: white;">
+        <?php else:?>
+        <li class="sideline" id="all" onclick="view('<?= Html::encode($cat["title"])?>')">
+        <?php endif;?>
+        <?=Html::encode($cat['title'])?>
         </li>
-        <li class="sideline" id="Web" onclick="view('Web')">
-            Web
-        </li>
-        <li class="sideline" id="PPC" onclick="view('PPC')">
-            PPC
-        </li>
-        <li class="sideline" id="Crypto" onclick="view('Crypto')">
-            Crypto
-        </li>
-        <li class="sideline" id="Forensic" onclick="view('Forensic')">
-            Forensic
-        </li>
-        <li class="sideline" id="Reverse" onclick="view('Reverse')">
-            Reverse
-        </li>
+        <?php endforeach;?>
     </ul>
 </div>
 

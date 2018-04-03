@@ -19,8 +19,8 @@ class m180324_065822_addUserTable extends Migration
             'status' => "ENUM('admin', 'user')",
             'score'=> $this->integer()->defaultValue(0),
             'image'=>$this->string(255),
-            'name'=>$this->string(255),
-            'school'=>$this->string(255)
+            'name'=>$this->string(255)->notNull(),
+            'school'=>$this->string(255)->notNull()
         ]);
 
         return true;

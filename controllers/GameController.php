@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Category;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -88,7 +89,10 @@ class GameController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(["game/login"]);
         }
-        return $this->render('tasks');
+
+        $category = Category::find()->asArray()->all();
+
+        return $this->render('tasks',compact('category'));
     }
 
     /**
