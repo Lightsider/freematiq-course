@@ -42,7 +42,7 @@ class m180324_065923_addTaskLogTable extends Migration
             'id' => $this->primaryKey()->comment('Первичный ключ'),
             'id_user'=> $this->integer(),
             'id_task'=> $this->integer(),
-            'time'=>$this->date(),
+            'time'=>$this->timestamp(),
             'flag'=>$this->string(255),
             'result'=>"ENUM('false', 'true')"
         ]);

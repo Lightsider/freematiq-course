@@ -2,23 +2,19 @@
 
 namespace app\controllers\admin;
 
-use app\models\Category;
 use Yii;
-use app\models\Tasks;
-use app\models\TasksSearch;
-use yii\helpers\ArrayHelper;
+use app\models\News;
+use app\models\NewsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TasksController implements the CRUD actions for Tasks model.
+ * NewsController implements the CRUD actions for News model.
  */
-class TasksController extends Controller
+class NewsController extends Controller
 {
     public $layout = 'default';
-
-
     /**
      * @inheritdoc
      */
@@ -35,12 +31,12 @@ class TasksController extends Controller
     }
 
     /**
-     * Lists all Tasks models.
+     * Lists all News models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TasksSearch();
+        $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -50,7 +46,7 @@ class TasksController extends Controller
     }
 
     /**
-     * Displays a single Tasks model.
+     * Displays a single News model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -63,27 +59,25 @@ class TasksController extends Controller
     }
 
     /**
-     * Creates a new Tasks model.
+     * Creates a new News model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Tasks();
+        $model = new News();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-
         return $this->render('create', [
             'model' => $model,
-            'category' => ArrayHelper::map(Category::find()->all(),'id','title')
         ]);
     }
 
     /**
-     * Updates an existing Tasks model.
+     * Updates an existing News model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -103,7 +97,7 @@ class TasksController extends Controller
     }
 
     /**
-     * Deletes an existing Tasks model.
+     * Deletes an existing News model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -117,15 +111,15 @@ class TasksController extends Controller
     }
 
     /**
-     * Finds the Tasks model based on its primary key value.
+     * Finds the News model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Tasks the loaded model
+     * @return News the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tasks::findOne($id)) !== null) {
+        if (($model = News::findOne($id)) !== null) {
             return $model;
         }
 

@@ -2,24 +2,20 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
- * This is the model class for table "user".
+ * User model
  *
- * @property int $id Первичный ключ
+ * @property integer $id
  * @property string $login
  * @property string $password_hash
  * @property string $status
- * @property int $score
+ * @property integer $score
  * @property string $image
  * @property string $name
  * @property string $school
  * @property string $password write-only password
- *
- * @property Tasklog[] $tasklogs
  */
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class UserReg extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
@@ -27,55 +23,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function tableName()
     {
         return 'user';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['login', 'password_hash', 'name', 'school'], 'required'],
-            [['status'], 'string'],
-            [['score'], 'integer'],
-            [['login', 'image', 'name', 'school'], 'string', 'max' => 255],
-            [['password_hash'], 'string', 'max' => 60],
-            [['login'], 'unique'],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'login' => 'Login',
-            'password_hash' => 'Password',
-            'status' => 'Status',
-            'score' => 'Score',
-            'image' => 'Image',
-            'name' => 'Name',
-            'school' => 'School',
-        ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTasklogs()
-    {
-        return $this->hasMany(Tasklog::className(), ['id_user' => 'id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return UserQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new UserQuery(get_called_class());
     }
 
     /**
@@ -150,5 +97,4 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $this->password_hash = \Yii::$app->security->generatePasswordHash($password);
     }
-
 }

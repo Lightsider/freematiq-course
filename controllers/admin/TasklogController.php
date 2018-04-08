@@ -2,22 +2,22 @@
 
 namespace app\controllers\admin;
 
-use app\models\Category;
-use Yii;
 use app\models\Tasks;
-use app\models\TasksSearch;
+use app\models\User;
+use Yii;
+use app\models\Tasklog;
+use app\models\TasklogSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TasksController implements the CRUD actions for Tasks model.
+ * TasklogController implements the CRUD actions for Tasklog model.
  */
-class TasksController extends Controller
+class TasklogController extends Controller
 {
     public $layout = 'default';
-
 
     /**
      * @inheritdoc
@@ -35,12 +35,12 @@ class TasksController extends Controller
     }
 
     /**
-     * Lists all Tasks models.
+     * Lists all Tasklog models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TasksSearch();
+        $searchModel = new TasklogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -50,7 +50,7 @@ class TasksController extends Controller
     }
 
     /**
-     * Displays a single Tasks model.
+     * Displays a single Tasklog model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -63,27 +63,27 @@ class TasksController extends Controller
     }
 
     /**
-     * Creates a new Tasks model.
+     * Creates a new Tasklog model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Tasks();
+        $model = new Tasklog();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-
         return $this->render('create', [
             'model' => $model,
-            'category' => ArrayHelper::map(Category::find()->all(),'id','title')
+            'user' => ArrayHelper::map(User::find()->all(),'id','name'),
+            'tasks' => ArrayHelper::map(Tasks::find()->all(),'id','title')
         ]);
     }
 
     /**
-     * Updates an existing Tasks model.
+     * Updates an existing Tasklog model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -103,7 +103,7 @@ class TasksController extends Controller
     }
 
     /**
-     * Deletes an existing Tasks model.
+     * Deletes an existing Tasklog model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -117,15 +117,15 @@ class TasksController extends Controller
     }
 
     /**
-     * Finds the Tasks model based on its primary key value.
+     * Finds the Tasklog model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Tasks the loaded model
+     * @return Tasklog the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tasks::findOne($id)) !== null) {
+        if (($model = Tasklog::findOne($id)) !== null) {
             return $model;
         }
 

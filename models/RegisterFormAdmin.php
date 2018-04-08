@@ -11,14 +11,13 @@ use yii\base\Model;
  * @property User|null $user This property is read-only.
  *
  */
-class RegisterForm extends Model
+class RegisterFormAdmin extends Model
 {
     public $login;
-    public $password;
-    public $password_hash = "passw";
-    public $status = 'user';
-    public $score = 0;
-    public $image = 'img/game/no_logo.png';
+    public $password_hash;
+    public $status;
+    public $score;
+    public $image;
     public $name;
     public $school;
 
@@ -32,8 +31,11 @@ class RegisterForm extends Model
             ['login', 'required'],
             ['login', 'unique', 'targetClass' => '\app\models\User', 'message' => 'Этот логин уже занят'],
             ['login', 'string', 'min' => 3, 'max' => 255],
-            ['password', 'required'],
-            ['password', 'string', 'min' => 5],
+            ['password_hash', 'required'],
+            ['password_hash', 'string', 'min' => 5],
+            ['status', 'string'],
+            ['score', 'integer'],
+            ['image', 'string', 'max' => 255],
             ['name', 'required'],
             ['name', 'string', 'min' => 3, 'max' => 255],
             ['school', 'required'],
@@ -49,22 +51,20 @@ class RegisterForm extends Model
      */
     public function register()
     {
-        if (!$this->validate()) {
+        /*if (!$this->validate()) {
 
             return null;
-        }
+        }*/
 
-
-        $user = new UserReg();
+        $user = new User();
 
         $user->login = $this->login;
-        $user->setPassword($this->password);
-        $user->score = 0;
-        $user->status = 'user';
-        $user->image = "img/game/no_logo.png";
+        $user->setPassword($this->password_hash);
+        $user->score = $this->score;
+        $user->status = $this->status;
+        $user->image = $this->image;
         $user->name = $this->name;
         $user->school = $this->school;
-
 
         return $user->save() ? $user : null;
     }

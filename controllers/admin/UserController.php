@@ -2,23 +2,21 @@
 
 namespace app\controllers\admin;
 
-use app\models\Category;
+use app\models\RegisterForm;
+use app\models\RegisterFormAdmin;
 use Yii;
-use app\models\Tasks;
-use app\models\TasksSearch;
-use yii\helpers\ArrayHelper;
+use app\models\User;
+use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TasksController implements the CRUD actions for Tasks model.
+ * UserController implements the CRUD actions for User model.
  */
-class TasksController extends Controller
+class UserController extends Controller
 {
     public $layout = 'default';
-
-
     /**
      * @inheritdoc
      */
@@ -35,12 +33,12 @@ class TasksController extends Controller
     }
 
     /**
-     * Lists all Tasks models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TasksSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -50,7 +48,7 @@ class TasksController extends Controller
     }
 
     /**
-     * Displays a single Tasks model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -63,27 +61,27 @@ class TasksController extends Controller
     }
 
     /**
-     * Creates a new Tasks model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Tasks();
+        $model = new User();
+        $reg = new RegisterFormAdmin();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if ($reg->load(Yii::$app->request->post(),'User') && $user = $reg->register()) {
+            return $this->redirect(['view', 'id' => $user->id]);
         }
-
 
         return $this->render('create', [
             'model' => $model,
-            'category' => ArrayHelper::map(Category::find()->all(),'id','title')
         ]);
     }
 
     /**
-     * Updates an existing Tasks model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -103,7 +101,7 @@ class TasksController extends Controller
     }
 
     /**
-     * Deletes an existing Tasks model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -117,15 +115,15 @@ class TasksController extends Controller
     }
 
     /**
-     * Finds the Tasks model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Tasks the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tasks::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         }
 

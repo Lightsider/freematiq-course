@@ -37,9 +37,12 @@ DefaultAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+                ['label' => 'Задания', 'url' => ['/admin/tasks']],
+                ['label' => 'Лог', 'url' => ['/admin/tasklog']],
+                ['label' => 'Пользователи', 'url' => ['/admin/user']],
+                ['label' => 'Категории', 'url' => ['/admin/category']],
+                ['label' => 'Новости', 'url' => ['/admin/news']],
+                ['label' => 'К соревнованиям', 'url' => ['/game/tasks']]
             ],
         ]);
         NavBar::end();
