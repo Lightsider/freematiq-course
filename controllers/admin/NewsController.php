@@ -12,9 +12,9 @@ use yii\filters\VerbFilter;
 /**
  * NewsController implements the CRUD actions for News model.
  */
-class NewsController extends Controller
+class NewsController extends AdminController
 {
-    public $layout = 'default';
+
     /**
      * @inheritdoc
      */

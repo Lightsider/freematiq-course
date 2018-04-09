@@ -10,14 +10,14 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\GameAsset;
+use app\models\User;
 
 GameAsset::register($this);
 
 
-if(!Yii::$app->user->isGuest)
-{
-    $user=new \app\models\User();
-    $user=\app\models\User::findIdentity(Yii::$app->user->id);
+if (!Yii::$app->user->isGuest) {
+    $user = new \app\models\User();
+    $user = \app\models\User::findIdentity(Yii::$app->user->id);
 }
 ?>
 <?php $this->beginPage() ?>
@@ -43,10 +43,8 @@ if(!Yii::$app->user->isGuest)
             <ul>
                 <li class="primary" name="tasks"><?= Html::a('Задания', ['game/tasks']) ?></li>
                 <li class="primary" name="result"><?= Html::a('Результаты', ['game/result']) ?></li>
-                <?php if(Yii::$app->user->isGuest):?>
-                <li class="primary" name="result"><?= Html::a('Вход', ['game/login']) ?></li>
-                <?php else:?>
-                <li class="primary" name="login"><?= Html::a('Выход', ['game/login']) ?></li>
+                <?php if (User::isAdmin()): ?>
+                <li class="white"><?= Html::a('К администрированию', ['admin/tasks']) ?></li>
                 <?php endif; ?>
                 <li class="purple"><?= Html::a('К информации', ['site/index']) ?></li>
             </ul>
@@ -65,11 +63,13 @@ if(!Yii::$app->user->isGuest)
             <?php if (Yii::$app->user->isGuest) {
                 echo Html::a('<p style=\'text-align: center;padding-top: 10px;padding-bottom: 10px;\'>Вход</p>', ['game/login']);
             } else {
-                echo "<div class=\"profile-logo\" style=\"background-image: url('" . $user->image . "')\"></div>
+
+
+                echo Html::a("<div class=\"profile-logo\" style=\"background-image: url('" . $user->image . "')\"></div>
             <div class=\"credits\">
                 <p><b>" . $user->name . "</b></p>
                 <p>" . $user->score . " pts</p>
-            </div>";
+            </div>",['game/login']);
             }
             ?>
         </div>

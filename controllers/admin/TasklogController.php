@@ -15,9 +15,9 @@ use yii\filters\VerbFilter;
 /**
  * TasklogController implements the CRUD actions for Tasklog model.
  */
-class TasklogController extends Controller
+class TasklogController extends AdminController
 {
-    public $layout = 'default';
+
 
     /**
      * @inheritdoc

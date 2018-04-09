@@ -62,7 +62,7 @@ body {
 
 .container {
     margin: 0 auto;
-    width: 550px;
+    width: auto;
     min-height: 36px;
     margin-left: 0;
     margin-right: 0;
@@ -135,7 +135,7 @@ nav .container .active a:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
-nav .container li.active a, nav .container a:active, nav li.purple a {
+nav .container li.active a, nav .container a:active, nav li.purple a,nav li.white a {
     padding: 0 21px;
     line-height: 33px;
     color: #eee;
@@ -149,6 +149,11 @@ nav .container li.active a, nav .container a:active, nav li.purple a {
     background-image: linear-gradient(to bottom, #000000, #323637);
     -webkit-box-shadow: inset 0 -1px #151717, inset 0 -1px 8px rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 -1px #151717, inset 0 -1px 8px rgba(0, 0, 0, 0.2);
+}
+
+nav li.white a, nav li.white a:active
+{
+    border-bottom-color: white;
 }
 
 nav li.green a, nav li.green a:active {
@@ -507,6 +512,7 @@ hr {
 .profile:hover a
 {
     text-decoration: none;
+    text-shadow: none;
 }
 .credits {
     width: 100px;
@@ -529,7 +535,7 @@ hr {
 
 .error {
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     color: #0295ff;
 }
 
@@ -579,8 +585,8 @@ hr {
     padding-right: 11px;
 }
 .task-panel {
-    background-color: rgba(255, 255, 255, 0.7);
-    box-shadow: 0px 0px 20px #0295ff;
+
+    box-shadow: 0px 0px 20px black;
     width: 220px;
     height: 220px;
     border: 1px solid black;
@@ -596,8 +602,8 @@ hr {
 
 
 .task-panel:hover {
-    box-shadow: 0px 0px 40px #0295ff;
-    border: 1px solid #0295ff;
+    box-shadow: 0px 0px 40px black;
+    border: 1px solid black;
     -webkit-transform: scale(1.05);
     -moz-transform: scale(1.05);
     -o-transform: scale(1.05);
@@ -624,10 +630,11 @@ hr {
 }
 
 .task-body {
+    box-shadow:inset 0px 0px 10px black;
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 10px;
     color: black;
 }
-
 .price {
     font-size: 40px;
     margin-top: 30px;

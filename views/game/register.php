@@ -29,8 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id' => 'register-form',
                 'layout' => 'horizontal',
                 'fieldConfig' => [
-                    'template' => "{input}\n<p class=\"error\">{error}</p>",
+                    'template' => "{input}\n{error}",
                     'labelOptions' => ['class' => ''],
+                    'errorOptions' => ['class' => 'error'],
                 ],
             ]); ?>
                 <?=$form->field($model,'login')->textInput(['autofocus'=>'true','placeholder'=>'Логин'])?>
@@ -40,5 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::submitButton('Register', ['class' => '', 'name' => 'register-button'])?>
         </div>
         <?php ActiveForm::end(); ?>
+        <?= Html::a('Или войти', ['game/login']) ?>
     </div>
 

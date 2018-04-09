@@ -11,7 +11,15 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 
 DefaultAsset::register($this);
+
+if(!Yii::$app->user->isGuest)
+{
+    $user=new \app\models\User();
+    $user=\app\models\User::findIdentity(Yii::$app->user->id);
+}
 ?>
+<?php $this->beginPage() ?>
+
     <!DOCTYPE html>
     <html lang="<?= Yii::$app->language ?>">
     <head>
@@ -28,8 +36,8 @@ DefaultAsset::register($this);
     <div class="wrap">
         <?php
         NavBar::begin([
-            'brandLabel' => Yii::$app->name,
-            'brandUrl' => Yii::$app->homeUrl,
+            'brandLabel' => $user->name,
+            'brandUrl' => "/game/login",
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
@@ -59,13 +67,15 @@ DefaultAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+            <p class="pull-left">SchoolCTF &copy;  <?= date('Y') ?></p>
 
-            <p class="pull-right"><?= Yii::powered() ?></p>
+            <p class="pull-right">by Obi-Wan Kenobi</p>
         </div>
     </footer>
 
     <?php $this->endBody() ?>
     </body>
     </html>
-<?php $this->endPage() ?>
+<?php
+    $this->endPage() ;
+?>

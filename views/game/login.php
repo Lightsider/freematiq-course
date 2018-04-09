@@ -39,6 +39,7 @@ if(!Yii::$app->user->isGuest)
                 'fieldConfig' => [
                     'template' => "{input}\n<p class=\"error\">{error}</p>",
                     'labelOptions' => ['class' => ''],
+                    'errorOptions' => ['class' => 'error']
                 ],
             ]); ?>
             <?=$form->field($model,'login')->textInput(['autofocus'=>'true','placeholder'=>'Логин'])?>

@@ -151,4 +151,20 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $this->password_hash = \Yii::$app->security->generatePasswordHash($password);
     }
 
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public static function isAdmin()
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+        $user=User::findIdentity( Yii::$app->user->getId());
+
+        if($user->getStatus()==="admin") return true;
+        else return false;
+    }
 }
