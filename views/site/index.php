@@ -53,12 +53,12 @@ foreach ($news as $oneNews)
 {
     ?>
     <div class="post">
-        <p class="post-title"><?=Html::encode($oneNews['title'])?></p>
+        <p class="post-title"><?=Html::encode($oneNews->title)?></p>
         <div class="post-img">
-            <img src="<?=Html::encode($oneNews['image']);?>">
+            <img src="<?=Html::encode($oneNews->image);?>">
         </div>
         <div class="post-content">
-        <?php echo splitIntoParagraphs(Html::encode($oneNews['text']));?>
+        <?php echo splitIntoParagraphs(Html::encode($oneNews->text));?>
         </div>
     </div>
 <?php

@@ -15,7 +15,6 @@ class RegisterForm extends Model
 {
     public $login;
     public $password;
-    public $password_hash = "passw";
     public $status = 'user';
     public $score = 0;
     public $image = 'img/game/no_logo.png';
@@ -61,11 +60,19 @@ class RegisterForm extends Model
         $user->setPassword($this->password);
         $user->score = 0;
         $user->status = 'user';
-        $user->image = "img/game/no_logo.png";
+        $user->image = "/img/game/no_logo.png";
         $user->name = $this->name;
         $user->school = $this->school;
 
+        if ($user->save()) {
 
-        return $user->save() ? $user : null;
+            $rbac = \Yii::$app->authManager;
+            $userRole = $rbac->getRole('user');
+
+            $rbac->assign($userRole, $user->id);
+
+            return $user;
+        }
+        return null;
     }
 }

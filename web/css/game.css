@@ -460,7 +460,7 @@ hr {
 }
 
 .form-module input::-webkit-input-placeholder {
-    color: dodgerblue;
+    color: #0c2447;
 }
 
 .form-module input:focus {
@@ -506,13 +506,15 @@ hr {
 
 .profile a
 {
-    color:white;
+    color: #ddd;
+    text-decoration: none;
 }
 
 .profile:hover a
 {
     text-decoration: none;
     text-shadow: none;
+    color:white;
 }
 .credits {
     width: 100px;
@@ -564,6 +566,7 @@ hr {
     margin-bottom: 15px;
     width: 250px;
     color: #0295ff;
+    text-transform: capitalize;
 
 }
 
@@ -641,6 +644,10 @@ hr {
     margin-bottom: 30px;
 }
 
+.category
+{
+    text-transform: capitalize;
+}
 .complete .task-title,.complete .modal-title, .complete .modal-footer {
     background: #0295ff;
     color: white;
@@ -717,6 +724,7 @@ hr {
 {
     font-size: 25px;
     font-weight: bold;
+    text-transform: uppercase;
 }
 .modal-content
 {
@@ -751,15 +759,16 @@ hr {
 .modal .error
 {
     margin: 20px auto;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     border: 1px solid #0295ff;
     background: rgba(0,0,0,0.7);
     cursor: default;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .modal-footer
 {
-    position: absolute;
     bottom: 0;
     height: 40px;
     background: black;
@@ -802,14 +811,14 @@ hr {
     height: 100%;
 }
 
-.modal-footer input
+.modal-footer input,.modal-footer button
 {
     font-size: 18px;
     color: #0295ff;
     height: 30px;
 }
 
-.modal-footer input:hover,.modal-footer input:active
+.modal-footer input:hover,.modal-footer input:active,.modal-footer button:hover,.modal-footer button:active
 {
     box-shadow: 0 0 10px #0295ff;
 }
@@ -820,7 +829,7 @@ hr {
     width: 500px;
     padding-left: 15px;
 }
-.modal-footer input[type=submit]
+.modal-footer input[type=submit],.modal-footer button[type=submit]
 {
     background-color: black;
     border: 1px solid #0295ff;
@@ -830,5 +839,17 @@ hr {
 }
 
 .modal-footer input::-webkit-input-placeholder {
-    color: #1a72cd;
+    color: #10447e;
+}
+
+.modal-footer div
+{
+    float:left;
+    margin-left: 40px;
+    margin-right: -35px;
+}
+
+.modal-footer
+{
+    text-align: center;
 }

@@ -69,6 +69,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->hasMany(Tasklog::className(), ['id_user' => 'id']);
     }
 
+    public function getCompleteTasklogs()
+    {
+        return $this->hasMany(Tasklog::className(), ['id_user' => 'id','result'=>'true']);
+    }
+
     /**
      * @inheritdoc
      * @return UserQuery the active query used by this AR class.

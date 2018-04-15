@@ -66,7 +66,7 @@ AppAsset::register($this);
 
     <div class="image-container">
         <div class="image-logo">
-            <img src="img/logoWhite.png"/>
+            <img src="/img/logoWhite.png"/>
         </div>
     </div>
     <div class="content-back">
@@ -83,8 +83,8 @@ AppAsset::register($this);
         <div class="social_icons">
             <p>Будь с нами</p>
             <ul>
-                <li><a href="#"> <img src="img/telegram.png"/></a></li>
-                <li><a href="#"> <img src="img/vk.png"/></a></li>
+                <li><a href="#"> <img src="/img/telegram.png"/></a></li>
+                <li><a href="#"> <img src="/img/vk.png"/></a></li>
             </ul>
         </div>
     </footer>

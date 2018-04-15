@@ -56,6 +56,7 @@ class TasksController extends AdminController
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'category' => ArrayHelper::map(Category::find()->all(),'id','title')
         ]);
     }
 
@@ -96,6 +97,7 @@ class TasksController extends AdminController
 
         return $this->render('update', [
             'model' => $model,
+            'category' => ArrayHelper::map(Category::find()->all(),'id','title')
         ]);
     }
 

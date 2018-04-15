@@ -20,6 +20,10 @@ $config = [
                 ]
             ]
         ,*/
+        'authManager' =>[
+            'class' => 'yii\rbac\DbManager',
+            //'defaultRoles' => ['user']
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '94cgca9V91Sc5wkeL2HeEE_ohnQYpcya',
@@ -61,6 +65,7 @@ $config = [
                 'particip' => 'site/particip',
                 'org' => 'site/org',
                 'contact' => 'site/contact',
+                'solve'=>'task/solve'
 
             ],
         ],

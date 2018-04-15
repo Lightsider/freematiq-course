@@ -63,44 +63,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $news=News::find()->asArray()->all();
+        $news=News::find()->all();
 
-        return $this->render('index',compact('news'));
-    }
-
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    /*public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
+        return $this->render('index',[
+            'news'=>$news
         ]);
-    }*/
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    /*public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }*/
+    }
 
     /**
      * Displays contact page.

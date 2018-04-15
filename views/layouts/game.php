@@ -16,7 +16,6 @@ GameAsset::register($this);
 
 
 if (!Yii::$app->user->isGuest) {
-    $user = new \app\models\User();
     $user = \app\models\User::findIdentity(Yii::$app->user->id);
 }
 ?>

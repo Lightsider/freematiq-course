@@ -8,6 +8,7 @@ use app\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 class AdminController extends Controller
 {
@@ -22,12 +23,34 @@ class AdminController extends Controller
         else return false;
     }
 
-    public function beforeAction($action)
+//    public function beforeAction($action)
+//    {
+//        if(!User::isAdmin())
+//        {
+//            return $this->redirect(['game/login']);
+//        }
+//        return parent::beforeAction($action);
+//    }
+
+    public function behaviors()
     {
-        if(!User::isAdmin())
-        {
-            return $this->redirect(['game/login']);
-        }
-        return parent::beforeAction($action);
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create', 'update', 'delete','index','view'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
+        ];
     }
 }

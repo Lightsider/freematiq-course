@@ -66,6 +66,15 @@ class RegisterFormAdmin extends Model
         $user->name = $this->name;
         $user->school = $this->school;
 
-        return $user->save() ? $user : null;
+        if ($user->save()) {
+
+            $rbac = \Yii::$app->authManager;
+            $role = $rbac->getRole($user->status);
+
+            $rbac->assign($role, $user->id);
+
+            return $user;
+        }
+        return null;
     }
 }

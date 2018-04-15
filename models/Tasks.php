@@ -65,6 +65,11 @@ class Tasks extends \yii\db\ActiveRecord
         return $this->hasMany(Tasklog::className(), ['id_task' => 'id']);
     }
 
+    public function getCompleteTasklogs()
+    {
+        return $this->hasMany(Tasklog::className(), ['id_task' => 'id','result'=>'true']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

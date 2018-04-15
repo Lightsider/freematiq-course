@@ -3,6 +3,9 @@
 namespace app\controllers;
 
 use app\models\Category;
+use app\models\OneTask;
+use app\models\Tasklog;
+use app\models\Tasks;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -84,15 +87,35 @@ class GameController extends Controller
      *
      * @return string
      */
-    public function actionTasks()
+    public function actionTasks($message="")
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect(["game/login"]);
         }
+        $user = \app\models\User::findIdentity(Yii::$app->user->id);
+        $user_id=$user->id;
 
-        $category = Category::find()->asArray()->all();
+        $categories = Category::find()->all();
+        $tasks = Tasks::find()->all();
+        $completeTasks = Tasklog::find()->filterWhere(['id_user'=>$user_id,'result'=>'true'])->asArray()->all();
+        foreach ($tasks as $task)
+        {
+            $completeAllTeamsTasks[$task->id]=Tasklog::find()->filterWhere(['id_task'=>$task->id,'result'=>'true'])->count();
+        }
 
-        return $this->render('tasks',compact('category'));
+        if(count($completeTasks)!=0)
+        foreach ($completeTasks as $completeTask)
+        {
+            $completeTaskArr[] = $completeTask['id_task'];
+        }
+        else $completeTaskArr=array();
+
+        return $this->render('tasks',[
+            'categories'=>$categories,
+            'tasks'=>$tasks,
+            'completeTasks'=>$completeTaskArr,
+            'completeAllTeamsTasks'=>$completeAllTeamsTasks
+        ]);
     }
 
     /**
