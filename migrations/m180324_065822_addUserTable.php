@@ -20,7 +20,8 @@ class m180324_065822_addUserTable extends Migration
             'score'=> $this->integer()->defaultValue(0),
             'image'=>$this->string(255),
             'name'=>$this->string(255)->notNull(),
-            'school'=>$this->string(255)->notNull()
+            'school'=>$this->string(255)->notNull(),
+            'city'=>$this->string(255)->notNull(),
         ]);
 
         return true;

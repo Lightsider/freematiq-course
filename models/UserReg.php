@@ -13,6 +13,7 @@ namespace app\models;
  * @property string $image
  * @property string $name
  * @property string $school
+ * @property string $city
  * @property string $password write-only password
  */
 class UserReg extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface

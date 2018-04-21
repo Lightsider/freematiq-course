@@ -20,6 +20,7 @@ class RegisterFormAdmin extends Model
     public $image;
     public $name;
     public $school;
+    public $city;
 
     /**
      * @inheritdoc
@@ -39,7 +40,9 @@ class RegisterFormAdmin extends Model
             ['name', 'required'],
             ['name', 'string', 'min' => 3, 'max' => 255],
             ['school', 'required'],
-            ['school', 'string', 'min' => 3, 'max' => 255]
+            ['school', 'string', 'min' => 3, 'max' => 255],
+            ['city', 'required'],
+            ['city', 'string', 'min' => 3, 'max' => 255]
         ];
     }
 
@@ -65,6 +68,7 @@ class RegisterFormAdmin extends Model
         $user->image = $this->image;
         $user->name = $this->name;
         $user->school = $this->school;
+        $user->city = $this->city;
 
         if ($user->save()) {
 

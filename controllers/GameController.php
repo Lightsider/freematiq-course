@@ -6,13 +6,13 @@ use app\models\Category;
 use app\models\OneTask;
 use app\models\Tasklog;
 use app\models\Tasks;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 
 class GameController extends Controller
 {
@@ -128,7 +128,13 @@ class GameController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(["game/login"]);
         }
-        return $this->render('result');
+
+        $users = new User();
+
+        $users=User::find()->where("status='user'")->orderBy(['score'=>SORT_DESC])->all();
+        return $this->render('result',[
+            'users'=>$users
+        ]);
     }
 
     public function actionIndex()

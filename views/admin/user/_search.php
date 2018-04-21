@@ -28,11 +28,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'score') ?>
 
-    <?php // echo $form->field($model, 'image') ?>
+    <?php  echo $form->field($model, 'image') ?>
 
-    <?php // echo $form->field($model, 'name') ?>
+    <?php  echo $form->field($model, 'name') ?>
 
-    <?php // echo $form->field($model, 'school') ?>
+    <?php  echo $form->field($model, 'school') ?>
+
+    <?php  echo $form->field($model, 'city') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

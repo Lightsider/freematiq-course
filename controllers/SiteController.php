@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -115,7 +116,12 @@ class SiteController extends Controller
      */
     public function actionParticip()
     {
-        return $this->render('particip');
+        $users = new User();
+
+        $users=User::find()->where("status='user'")->all();
+        return $this->render('particip',[
+            'users'=>$users
+        ]);
     }
 
     /*

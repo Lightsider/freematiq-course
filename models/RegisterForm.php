@@ -20,6 +20,7 @@ class RegisterForm extends Model
     public $image = 'img/game/no_logo.png';
     public $name;
     public $school;
+    public $city;
 
     /**
      * @inheritdoc
@@ -36,7 +37,9 @@ class RegisterForm extends Model
             ['name', 'required'],
             ['name', 'string', 'min' => 3, 'max' => 255],
             ['school', 'required'],
-            ['school', 'string', 'min' => 3, 'max' => 255]
+            ['school', 'string', 'min' => 3, 'max' => 255],
+            ['city', 'required'],
+            ['city', 'string', 'min' => 3, 'max' => 255]
         ];
     }
 
@@ -63,6 +66,7 @@ class RegisterForm extends Model
         $user->image = "/img/game/no_logo.png";
         $user->name = $this->name;
         $user->school = $this->school;
+        $user->city = $this->city;
 
         if ($user->save()) {
 

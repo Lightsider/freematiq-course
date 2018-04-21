@@ -15,6 +15,7 @@ use Yii;
  * @property string $image
  * @property string $name
  * @property string $school
+ * @property string $city
  * @property string $password write-only password
  *
  * @property Tasklog[] $tasklogs
@@ -58,6 +59,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'image' => 'Image',
             'name' => 'Name',
             'school' => 'School',
+            'city' => 'City'
         ];
     }
 

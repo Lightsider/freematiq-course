@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=$form->field($model,'password')->passwordInput(['placeholder'=>'Пароль'])?>
                 <?=$form->field($model,'name')->textInput(['placeholder'=>'Название команды'])?>
                 <?=$form->field($model,'school')->textInput(['placeholder'=>'Учебное заведение'])?>
+                <?=$form->field($model,'city')->textInput(['placeholder'=>'Город'])?>
                 <?= Html::submitButton('Register', ['class' => '', 'name' => 'register-button'])?>
         </div>
         <?php ActiveForm::end(); ?>
