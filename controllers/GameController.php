@@ -96,7 +96,7 @@ class GameController extends Controller
         $user_id=$user->id;
 
         $categories = Category::find()->all();
-        $tasks = Tasks::find()->all();
+        $tasks = Tasks::find()->orderBy(['score'=>SORT_ASC])->all();
         $completeTasks = Tasklog::find()->filterWhere(['id_user'=>$user_id,'result'=>'true'])->asArray()->all();
         foreach ($tasks as $task)
         {

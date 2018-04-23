@@ -24,6 +24,19 @@ class m180324_065822_addUserTable extends Migration
             'city'=>$this->string(255)->notNull(),
         ]);
 
+        $this->insert('user',
+          [
+              'login'=>"admin",
+              'password_hash'=>\Yii::$app->security->generatePasswordHash("admin"),
+              'status' => "admin",
+              'score'=> 0,
+              'image'=>"",
+              'name'=>"admin",
+              'school'=>"admin",
+              'city'=>"admin",
+          ]
+        );
+
         return true;
     }
 

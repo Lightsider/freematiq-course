@@ -30,7 +30,7 @@ if (!Yii::$app->user->isGuest) {
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <link rel="shortcut icon" href="img/logoWhite.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/logoWhite.png" type="image/x-icon">
 </head>
 <body>
 <header>

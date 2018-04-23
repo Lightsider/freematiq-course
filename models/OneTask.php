@@ -2,6 +2,7 @@
 
 namespace app\models;
 use app\models\Category;
+use DateTime;
 use Yii;
 use yii\base\Model;
 
@@ -46,7 +47,8 @@ class OneTask extends Model
             $tasklog = new Tasklog();
             $tasklog->id_user = Yii::$app->user->getId();
             $tasklog->id_task = $task->id;
-            $tasklog->time = date('Y-m-d H:i:s');
+            $date = new DateTime('now',new \DateTimeZone("Asia/Barnaul"));
+            $tasklog->time = $date->format("Y-m-d H-m-s");
             $tasklog->flag = $this->flag;
 
             if ($this->validate()) {

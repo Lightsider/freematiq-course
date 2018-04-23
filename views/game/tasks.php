@@ -43,7 +43,7 @@ $this->title = 'Задания';
                 <div class="task-title">
                     <p class="category"><?php
                         foreach ($categories as $i => $category)
-                            if ($category->id == $task->id)
+                            if ($category->id == $task->id_category)
                                 echo Html::encode($category->title);
                         ?></p>
                 </div>
@@ -70,7 +70,7 @@ $this->title = 'Задания';
                 <div class="modal-content">
                     <p class="task-category"> <?php
                         foreach ($categories as $i => $category)
-                            if ($category->id == $task->id)
+                            if ($category->id == $task->id_category)
                                 echo Html::encode($category->title);
                         ?> </p>
                     <p class="price"><?= Html::encode($task->score) ?></p>
