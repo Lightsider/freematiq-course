@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $users  */
+/* @var $users \app\models\User[]|array */
 
 use yii\helpers\Html;
 
@@ -36,7 +36,7 @@ $this->title = 'Результаты';
             elseif($key==2)echo "style='background-color: rgba(153, 95, 37, 0.8)'";
             ?>>
                 <td><?=$key+1?></td>
-                <td><img src="<?=Html::encode($user->image)?>" height="80"></td>
+                <td><img src="<?=Html::encode($user->getUploadPath())?>" height="80"></td>
                 <td style="font-weight: bold;"><?=Html::encode($user->name)?></td>
                 <td><?=Html::encode($user->city)?></td>
                 <td><?=Html::encode($user->school)?></td>

@@ -10,7 +10,12 @@ use yii\widgets\ActiveForm;
 
 <div class="user-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'method' => "post",
+            'enctype'=>'multipart/form-data'
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'login')->textInput(['maxlength' => true]) ?>
 
@@ -20,7 +25,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'score')->textInput() ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <? if(isset($model->image))echo $form->field($model, 'image')->textInput(['maxlength' => true]);
+    else echo $form->field($model, 'file')->fileInput(['accept'=>"image/*"]);
+    ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

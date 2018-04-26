@@ -23,7 +23,7 @@ $this->title = 'Участники';
         foreach ($users as $key=>$user):?>
         <tr>
             <td><?=$key+1?></td>
-            <td><img src="<?=Html::encode($user->image)?>" height="80"></td>
+            <td><img src="<?=Html::encode($user->getUploadPath())?>" height="80"></td>
             <td style="font-weight: bold;"><?=Html::encode($user->name)?></td>
             <td><?=Html::encode($user->city)?></td>
             <td><?=Html::encode($user->school)?></td>

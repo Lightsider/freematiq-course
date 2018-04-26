@@ -98,4 +98,9 @@ class UserReg extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $this->password_hash = \Yii::$app->security->generatePasswordHash($password);
     }
+
+    public function getUploadPath()
+    {
+        return empty($this->image) ? null : '/img/game/uploads/' . $this->image;
+    }
 }

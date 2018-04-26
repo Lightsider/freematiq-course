@@ -21,6 +21,7 @@ class RegisterFormAdmin extends Model
     public $name;
     public $school;
     public $city;
+    public $file=null;
 
     /**
      * @inheritdoc
@@ -42,7 +43,8 @@ class RegisterFormAdmin extends Model
             ['school', 'required'],
             ['school', 'string', 'min' => 3, 'max' => 255],
             ['city', 'required'],
-            ['city', 'string', 'min' => 3, 'max' => 255]
+            ['city', 'string', 'min' => 3, 'max' => 255],
+            [['file'],'file','extensions' => "jpg,png,gif"]
         ];
     }
 
@@ -54,10 +56,10 @@ class RegisterFormAdmin extends Model
      */
     public function register()
     {
-        /*if (!$this->validate()) {
+        if (!$this->validate()) {
 
             return null;
-        }*/
+        }
 
         $user = new User();
 
@@ -65,19 +67,34 @@ class RegisterFormAdmin extends Model
         $user->setPassword($this->password_hash);
         $user->score = $this->score;
         $user->status = $this->status;
-        $user->image = $this->image;
+        if ($this->file) {
+            $user->image = \Yii::$app->security->generateRandomString() . '.jpg';
+        }
+        elseif($this->image!=="") $user->image = $this->image;
+        else $user->image = "/img/game/no_logo.png";
+
         $user->name = $this->name;
         $user->school = $this->school;
         $user->city = $this->city;
 
-        if ($user->save()) {
 
-            $rbac = \Yii::$app->authManager;
-            $role = $rbac->getRole($user->status);
+        $rbac = \Yii::$app->authManager;
+        $role = $rbac->getRole($user->status);
 
-            $rbac->assign($role, $user->id);
-
-            return $user;
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if ($user->save()) {
+                if ($this->file) {
+                    $this->file->saveAs(Yii::getAlias('@webroot') . "/img/game/uploads/{$user->image}");
+                }
+                $rbac->assign($role, $user->id);
+                $transaction->commit();
+                return $user;
+            }
+        }
+        catch (\Throwable $e)
+        {
+            $transaction->rollBack();
         }
         return null;
     }

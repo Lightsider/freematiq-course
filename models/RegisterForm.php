@@ -21,6 +21,7 @@ class RegisterForm extends Model
     public $name;
     public $school;
     public $city;
+    public $file = null;
 
     /**
      * @inheritdoc
@@ -46,7 +47,7 @@ class RegisterForm extends Model
     /**
      * Registers user
      *
-     * @return User|null the saved model or null if saving fails
+     * @return UserReg|null the saved model or null if saving fails
      * @throws \yii\base\Exception
      */
     public function register()
@@ -63,19 +64,30 @@ class RegisterForm extends Model
         $user->setPassword($this->password);
         $user->score = 0;
         $user->status = 'user';
-        $user->image = "/img/game/no_logo.png";
+        if ($this->file) {
+            $user->image = \Yii::$app->security->generateRandomString() . '.jpg';
+        } else $user->image = "/img/game/no_logo.png";
         $user->name = $this->name;
         $user->school = $this->school;
         $user->city = $this->city;
 
-        if ($user->save()) {
 
-            $rbac = \Yii::$app->authManager;
-            $userRole = $rbac->getRole('user');
+        $rbac = \Yii::$app->authManager;
+        $userRole = $rbac->getRole('user');
 
-            $rbac->assign($userRole, $user->id);
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if ($user->save()) {
+                if ($this->file) {
+                    $this->file->saveAs(Yii::getAlias('@webroot') . "/img/game/uploads/{$user->image}");
+                }
 
-            return $user;
+                $rbac->assign($userRole, $user->id);
+                $transaction->commit();
+                return $user;
+            }
+        } catch (\Throwable $e) {
+            $transaction->rollBack();
         }
         return null;
     }

@@ -174,4 +174,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         if($user->getStatus()==="admin") return true;
         else return false;
     }
+
+    public function getUploadPath()
+    {
+        return empty($this->image) ? null : '/img/game/uploads/' . $this->image;
+    }
 }

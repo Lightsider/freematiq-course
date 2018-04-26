@@ -13,6 +13,7 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use yii\web\UploadedFile;
 
 class GameController extends Controller
 {
@@ -157,6 +158,7 @@ class GameController extends Controller
         $model = new \app\models\RegisterForm();
 
         if ($model->load(Yii::$app->request->post())) {
+            $model->file = UploadedFile::getInstance($model, 'file');
             if ($user = $model->register()) {
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->redirect(["game/tasks"]);

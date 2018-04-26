@@ -64,7 +64,7 @@ if (!Yii::$app->user->isGuest) {
             } else {
 
 
-                echo Html::a("<div class=\"profile-logo\" style=\"background-image: url('" . $user->image . "')\"></div>
+                echo Html::a("<div class=\"profile-logo\" style=\"background-image: url('" . $user->getUploadPath() . "')\"></div>
             <div class=\"credits\">
                 <p><b>" . $user->name . "</b></p>
                 <p>" . $user->score . " pts</p>

@@ -10,6 +10,7 @@ use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -66,16 +67,20 @@ class UserController extends AdminController
      */
     public function actionCreate()
     {
-        $model = new User();
+        //$model = new User();
         $reg = new RegisterFormAdmin();
 
 
-        if ($reg->load(Yii::$app->request->post(),'User') && $user = $reg->register()) {
+        if ($reg->load(Yii::$app->request->post())) {
+            $reg->file = UploadedFile::getInstance($reg, 'file');
+            if ($user = $reg->register()) {
+                return $this->redirect(['view', 'id' => $reg->id]);
+            }
             return $this->redirect(['view', 'id' => $user->id]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $reg,
         ]);
     }
 
