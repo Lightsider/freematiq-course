@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Category;
+use app\models\Messages;
 use app\models\OneTask;
 use app\models\Tasklog;
 use app\models\Tasks;
@@ -111,11 +112,15 @@ class GameController extends Controller
         }
         else $completeTaskArr=array();
 
+
+        $messages=Messages::find()->orderBy(['time'=>SORT_DESC])->all();
+
         return $this->render('tasks',[
             'categories'=>$categories,
             'tasks'=>$tasks,
             'completeTasks'=>$completeTaskArr,
-            'completeAllTeamsTasks'=>$completeAllTeamsTasks
+            'completeAllTeamsTasks'=>$completeAllTeamsTasks,
+            'messages'=>$messages
         ]);
     }
 

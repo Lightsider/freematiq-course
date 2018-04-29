@@ -584,6 +584,62 @@ hr {
     color: inherit;
 }
 
+.sidebar hr
+{
+    border-color: #0295ff;
+}
+.info-block-main
+{
+    height: 450px;
+    overflow: auto;
+    padding: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #0295ff;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0295ff;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #0295ff;
+}
+
+.info-block
+{
+    color:#0295ff;
+    border: 3px outset #0295ff;
+    margin-top: 5%;
+
+}
+
+.info-block-title
+{
+    /*background: linear-gradient(to left bottom,#0295ff,#77D2FF);*/
+    background: #0295ff;
+    color:white;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.info-block-title p
+{
+    margin-bottom: 2%;
+}
+.info-block-content
+{
+    line-height: 1.5;
+    font-size: 17px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
 .tasks-content {
     width: 980px;
     float: right;

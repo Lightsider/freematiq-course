@@ -50,6 +50,7 @@ if(!Yii::$app->user->isGuest)
                 ['label' => 'Пользователи', 'url' => ['/admin/user']],
                 ['label' => 'Категории', 'url' => ['/admin/category']],
                 ['label' => 'Новости', 'url' => ['/admin/news']],
+                ['label' => 'Сообщения', 'url' => ['/admin/messages']],
                 ['label' => 'К соревнованиям', 'url' => ['/game/tasks']]
             ],
         ]);

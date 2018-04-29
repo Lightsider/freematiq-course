@@ -5,6 +5,8 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Tasklog */
+/* @var $user array */
+/* @var $tasks array */
 
 $this->title = 'Create Tasklog';
 $this->params['breadcrumbs'][] = ['label' => 'Tasklogs', 'url' => ['index']];

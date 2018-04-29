@@ -1,6 +1,12 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $completeAllTeamsTasks */
+/* @var $completeTasks array */
+/* @var $categories \app\models\Category[]|array */
+
+/* @var $tasks \app\models\Tasks[]|array */
+/* @var $messages \app\models\Messages[]|array */
 
 use app\models\OneTask;
 use yii\helpers\Html;
@@ -8,19 +14,35 @@ use yii\helpers\Html;
 $this->title = 'Задания';
 ?>
 <div class="sidebar">
-    <h2> Категории: </h2>
-    <ul>
-        <?php foreach ($categories as $i => $category): ?>
+    <div class="">
+        <h2> Категории: </h2>
+        <ul>
+            <?php foreach ($categories as $i => $category): ?>
 
-            <?php if ($i === 0): ?>
-                <li class="sideline" id="all" onclick="view('<?= Html::encode($category->title) ?>')" style="background-color: rgb(2, 149, 255); color: white;">
-            <?php else: ?>
-                <li class="sideline" id="all" onclick="view('<?= Html::encode($category->title) ?>')">
-            <?php endif; ?>
-            <?= Html::encode($category->title) ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+                <?php if ($i === 0): ?>
+                    <li class="sideline" id="all" onclick="view('<?= Html::encode($category->title) ?>')" style="background-color: rgb(2, 149, 255); color: white;">
+                <?php else: ?>
+                    <li class="sideline" id="all" onclick="view('<?= Html::encode($category->title) ?>')">
+                <?php endif; ?>
+                <?= Html::encode($category->title) ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <hr>
+    <h2 style="margin-bottom: 10px">Информация:</h2>
+    <div class="info-block-main">
+        <?php foreach ($messages as $message):?>
+        <div class="info-block">
+            <div class="info-block-title"><p><?php echo Html::encode($message->title)?></p>
+                <p><?php
+                    $date = new DateTime($message->time,new \DateTimeZone("Asia/Barnaul"));
+                    echo Html::encode($date->format("H:i"))?></p>
+            </div>
+            <p class="info-block-content"><?php echo $message->description?></p>
+        </div>
+        <?php endforeach;?>
+    </div>
 </div>
 
 <div class="tasks-content">
