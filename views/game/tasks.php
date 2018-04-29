@@ -22,7 +22,7 @@ $this->title = 'Задания';
                 <?php if ($i === 0): ?>
                     <li class="sideline" id="all" onclick="view('<?= Html::encode($category->title) ?>')" style="background-color: rgb(2, 149, 255); color: white;">
                 <?php else: ?>
-                    <li class="sideline" id="all" onclick="view('<?= Html::encode($category->title) ?>')">
+                    <li class="sideline" id="<?= Html::encode($category->title) ?>" onclick="view('<?= Html::encode($category->title) ?>')">
                 <?php endif; ?>
                 <?= Html::encode($category->title) ?>
                 </li>

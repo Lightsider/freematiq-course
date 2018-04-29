@@ -23,7 +23,20 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
+::-webkit-scrollbar {
+    width: 5px;
+}
 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #933d8c;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #933d8c;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #933d8c;
+}
 body {
     line-height: 1;
 }
