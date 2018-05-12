@@ -35,9 +35,8 @@ if(!Yii::$app->user->isGuest)
 
             <?php $form = ActiveForm::begin([
                 'id' => 'login-form',
-                'layout' => 'horizontal',
                 'fieldConfig' => [
-                    'template' => "{input}\n<p class=\"error\">{error}</p>",
+                    'template' => "{input}\n{error}",
                     'labelOptions' => ['class' => ''],
                     'errorOptions' => ['class' => 'error']
                 ],

@@ -27,13 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php $form = ActiveForm::begin([
             'id' => 'register-form',
-            'layout' => '',
             'options' => [
                 'method' => "post",
                 'enctype'=>'multipart/form-data'
             ],
             'fieldConfig' => [
-                'template' => "{input}",
+                'template' => "{input}{error}",
                 'labelOptions' => ['class' => ''],
                 'errorOptions' => ['class' => 'error'],
             ],

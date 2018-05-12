@@ -9,6 +9,7 @@ use app\models\Tasklog;
 use app\models\Tasks;
 use app\models\User;
 use Yii;
+use yii\base\Exception;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -164,10 +165,13 @@ class GameController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->file = UploadedFile::getInstance($model, 'file');
-            if ($user = $model->register()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->redirect(["game/tasks"]);
+            try {
+                if ($user = $model->register()) {
+                    if (Yii::$app->getUser()->login($user)) {
+                        return $this->redirect(["game/tasks"]);
+                    }
                 }
+            } catch (Exception $e) {
             }
         }
 

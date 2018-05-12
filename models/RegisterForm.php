@@ -30,16 +30,16 @@ class RegisterForm extends Model
     {
         return [
             ['login', 'trim'],
-            ['login', 'required'],
+            ['login', 'required', 'message'=>'Логин не может быть пустым'],
             ['login', 'unique', 'targetClass' => '\app\models\User', 'message' => 'Этот логин уже занят'],
             ['login', 'string', 'min' => 3, 'max' => 255],
-            ['password', 'required'],
+            ['password', 'required','message'=>'Пароль не может быть пустым'],
             ['password', 'string', 'min' => 5],
-            ['name', 'required'],
+            ['name', 'required','message'=>'Имя не может быть пустым'],
             ['name', 'string', 'min' => 3, 'max' => 255],
-            ['school', 'required'],
+            ['school', 'required','message'=>'Школа не может быть пустым'],
             ['school', 'string', 'min' => 3, 'max' => 255],
-            ['city', 'required'],
+            ['city', 'required','message'=>'Город не может быть пустым'],
             ['city', 'string', 'min' => 3, 'max' => 255]
         ];
     }
