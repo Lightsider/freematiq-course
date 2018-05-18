@@ -57,7 +57,6 @@ class RegisterFormAdmin extends Model
     public function register()
     {
         if (!$this->validate()) {
-
             return null;
         }
 
@@ -95,6 +94,80 @@ class RegisterFormAdmin extends Model
         catch (\Throwable $e)
         {
             $transaction->rollBack();
+            if(file_exists(Yii::getAlias('@webroot') . "/img/game/uploads/{$user->image}"))
+            {
+                unlink(Yii::getAlias('@webroot') . "/img/game/uploads/{$user->image}");
+            }
+            die($e->getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * update user
+     *
+     * @return User|null the saved model or null if saving fails
+     * @throws \yii\base\Exception
+     */
+    public function updateUser($currentUser)
+    {
+
+        if($this->login!==$currentUser->login)
+        if (!$this->validate()) {
+            return null;
+        }
+
+
+
+
+        $user = User::findIdentity($currentUser->id);
+        $user->login = $this->login;
+
+        if($this->password_hash!=="")
+        $user->setPassword($this->password_hash);
+        else
+        $user->password_hash = $currentUser->password_hash;
+        $user->score = $this->score;
+
+        $user->status = $this->status;
+        if ($this->file) {
+            $oldImage=$user->image;
+            $user->image = \Yii::$app->security->generateRandomString() . '.jpg';
+        }
+        elseif($this->image!=="") $user->image = $this->image;
+        else $user->image = $currentUser->image;
+
+        $user->name = $this->name;
+        $user->school = $this->school;
+        $user->city = $this->city;
+
+        $rbac = \Yii::$app->authManager;
+        $role = $rbac->getRole($user->status);
+
+        $transaction = Yii::$app->db->beginTransaction();
+
+        try {
+            if ($user->save()) {
+                if ($this->file) {
+                    if(file_exists($oldImage))
+                    {
+                        unlink($oldImage);
+                    }
+                    $this->file->saveAs(Yii::getAlias('@webroot') . "/img/game/uploads/{$user->image}");
+                }
+
+                $rbac->revokeAll( $user->id);
+                $rbac->assign($role, $user->id);
+
+                $transaction->commit();
+
+                return $user;
+            }
+        }
+        catch (\Throwable $e)
+        {
+            $transaction->rollBack();
+            die($e->getMessage());
         }
         return null;
     }

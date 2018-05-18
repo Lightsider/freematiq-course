@@ -74,7 +74,7 @@ class UserController extends AdminController
         if ($reg->load(Yii::$app->request->post())) {
             $reg->file = UploadedFile::getInstance($reg, 'file');
             if ($user = $reg->register()) {
-                return $this->redirect(['view', 'id' => $reg->id]);
+                return $this->redirect(['view', 'id' => $user->id]);
             }
         }
 
@@ -92,7 +92,25 @@ class UserController extends AdminController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $reg = new RegisterFormAdmin();
+        $currentUser = $this->findModel($id);
+
+        if ($reg->load(Yii::$app->request->post())) {
+
+            $reg->file = UploadedFile::getInstance($reg, 'file');
+            if ($user = $reg->updateUser($currentUser)) {
+                return $this->redirect(['view', 'id' => $user->id]);
+            }
+        }
+
+        return $this->render('update', [
+            'model' => $reg,
+            'user'=>$currentUser
+        ]);
+
+
+
+        /*$model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -100,7 +118,7 @@ class UserController extends AdminController
 
         return $this->render('update', [
             'model' => $model,
-        ]);
+        ]);*/
     }
 
     /**
@@ -112,6 +130,8 @@ class UserController extends AdminController
      */
     public function actionDelete($id)
     {
+        $rbac = \Yii::$app->authManager;
+        $rbac->revokeAll( $id);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

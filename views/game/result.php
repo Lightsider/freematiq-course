@@ -31,7 +31,7 @@ $this->title = 'Результаты';
         </tr>
         <?php
         foreach ($users as $key=>$user):?>
-            <tr <?if($key==0)echo "style='background-color: rgba(184,134,11,0.9)'";
+            <tr <?php if($key==0)echo "style='background-color: rgba(184,134,11,0.9)'";
             elseif($key==1)echo "style='background-color: rgba(119,136,153,0.7)'";
             elseif($key==2)echo "style='background-color: rgba(153, 95, 37, 0.8)'";
             ?>>
