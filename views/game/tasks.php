@@ -6,6 +6,7 @@
 /* @var $categories \app\models\Category[]|array */
 
 /* @var $tasks \app\models\Tasks[]|array */
+
 /* @var $messages \app\models\Messages[]|array */
 
 use app\models\OneTask;
@@ -32,16 +33,16 @@ $this->title = 'Задания';
     <hr>
     <h2 style="margin-bottom: 10px">Информация:</h2>
     <div class="info-block-main">
-        <?php foreach ($messages as $message):?>
-        <div class="info-block">
-            <div class="info-block-title"><p><?php echo Html::encode($message->title)?></p>
-                <p><?php
-                    $date = new DateTime($message->time,new \DateTimeZone("Asia/Barnaul"));
-                    echo Html::encode($date->format("H:i"))?></p>
+        <?php foreach ($messages as $message): ?>
+            <div class="info-block">
+                <div class="info-block-title"><p><?php echo Html::encode($message->title) ?></p>
+                    <p><?php
+                        $date = new DateTime($message->time, new \DateTimeZone("Asia/Barnaul"));
+                        echo Html::encode($date->format("H:i")) ?></p>
+                </div>
+                <p class="info-block-content"><?php echo $message->description ?></p>
             </div>
-            <p class="info-block-content"><?php echo $message->description?></p>
-        </div>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </div>
 </div>
 
@@ -120,7 +121,7 @@ $this->title = 'Задания';
                 </div>
             </div>
         </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
         <script>
             function view(cat = "all") {
                 var panels = document.getElementsByClassName("task-panel");

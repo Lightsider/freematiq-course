@@ -76,7 +76,6 @@ class UserController extends AdminController
             if ($user = $reg->register()) {
                 return $this->redirect(['view', 'id' => $reg->id]);
             }
-            return $this->redirect(['view', 'id' => $user->id]);
         }
 
         return $this->render('create', [

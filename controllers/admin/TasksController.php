@@ -19,7 +19,7 @@ class TasksController extends AdminController
      /**
      * @inheritdoc
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'verbs' => [
@@ -29,7 +29,7 @@ class TasksController extends AdminController
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * Lists all Tasks models.

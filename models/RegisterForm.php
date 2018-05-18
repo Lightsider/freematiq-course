@@ -77,14 +77,14 @@ class RegisterForm extends Model
 
         $transaction = Yii::$app->db->beginTransaction();
         try {
-            if ($user->save()) {
-                if ($this->file) {
-                    $this->file->saveAs(Yii::getAlias('@webroot') . "/img/game/uploads/{$user->image}");
-                }
+            if($this->file->saveAs(Yii::getAlias('@webroot') . "/img/game/uploads/{$user->image}")) {
+                if ($user->save()) {
 
-                $rbac->assign($userRole, $user->id);
-                $transaction->commit();
-                return $user;
+
+                    $rbac->assign($userRole, $user->id);
+                    $transaction->commit();
+                    return $user;
+                }
             }
         } catch (\Throwable $e) {
             $transaction->rollBack();
