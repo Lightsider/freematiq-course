@@ -90,7 +90,7 @@ class GameController extends Controller
      *
      * @return string
      */
-    public function actionTasks($message="")
+    public function actionTasks()
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect(["game/login"]);

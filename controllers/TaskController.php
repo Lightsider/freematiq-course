@@ -45,8 +45,8 @@ class TaskController extends Controller
     public function actionSolve()
     {
         $model = new \app\models\OneTask();
-        $model->load(\Yii::$app->request->post());
-        if ($model->load(Yii::$app->request->post()))
+        //$model->load(\Yii::$app->request->post());
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
         {
             $res=$model->checkSolve();
             if($res===1)
@@ -54,6 +54,7 @@ class TaskController extends Controller
                 $message="Вы правильно решили задание";
                 $user = \app\models\User::findIdentity(Yii::$app->user->id);
                 $user->score+=Tasks::findOne(['id'=>$model->task_id])->score;
+                $response['score']=$user->score;
                 $user->save();
             }
             elseif($res===0)
@@ -64,12 +65,13 @@ class TaskController extends Controller
             {
                 $message="Неверный флаг";
             }
-            else return $this->redirect("/game/tasks#task".$model->task_id);
+            else return json_encode(array("bad"));;
 
-            Yii::$app->session->setFlash('id_task',$model->task_id);
-            Yii::$app->session->setFlash('message',$message);
+            $response['id_task'] = $model->task_id;
+            $response['message']=$message;
 
-            return $this->redirect("/game/tasks#task".$model->task_id);
+
+            return json_encode($response);
         }
 
     }

@@ -12,11 +12,6 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
-
-
-//$this->title=Yii::$app->params['name'];
-
-
 ?>
 <?php $this->beginPage() ?>
 
@@ -30,7 +25,7 @@ AppAsset::register($this);
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
-        <link rel="shortcut icon" href="img/logoWhite.png" type="image/x-icon">
+        <link rel="shortcut icon" href="/img/logoWhite.png" type="image/x-icon">
     </head>
     <body>
     <?php $this->beginBody() ?>
@@ -72,8 +67,6 @@ AppAsset::register($this);
     <div class="content-back">
         <div class="content">
             <?= $content ?>
-
-
         </div>
     </div>
     <footer>

@@ -51,9 +51,9 @@ $this->title = 'Задания';
 
                    as $i => $task): ?>
 <?php if (in_array($task->id, $completeTasks)): ?>
-    <div class="task-panel complete" id="<?= Html::encode($task->id) ?> ">
+    <div class="task-panel complete" id="<?= Html::encode($task->id) ?>">
         <?php else: ?>
-        <div class="task-panel" id="<?= Html::encode($task->id) ?> ">
+        <div class="task-panel" id="<?= Html::encode($task->id) ?>">
             <?php endif; ?>
             <a href="#task<?= Html::encode($task->id) ?>">
                 <div class="task-title">
@@ -104,10 +104,8 @@ $this->title = 'Задания';
                         <?= $task->description ?>
                     </div>
 
-                    <?php if (Yii::$app->session->hasFlash("id_task")
-                        && Html::encode(Yii::$app->session->getFlash("id_task")) == $task->id): ?>
-                        <p class="error"> <?php echo Html::encode(Yii::$app->session->getFlash("message")); ?> </p>
-                    <?php endif; ?>
+                        <p class="error" style="display: none"> </p>
+
                 </div>
                 <div class="modal-footer">
                     <?php if (in_array($task->id, $completeTasks)): ?>
@@ -147,3 +145,45 @@ $this->title = 'Задания';
                 document.getElementById(cat).style.color = "white";
             }
         </script>
+        <script>
+
+            $('form').submit( function(e) {
+                e.preventDefault();
+
+                var data = $(this).serialize();
+                $.ajax({
+                    url: '/solve',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function(res){
+                        var taskId = "task" + res['id_task'];
+                        if(res['message']!=="Вы правильно решили задание") {
+                            $("#" + taskId).find(".error").css("display", "block");
+                            $("#" + taskId).find(".error").text(res['message']);
+                        }
+                        else
+                        {
+                            var id = res['id_task'];
+                            $("#" + id).addClass("complete");
+                            console.log($("#" + id).html());
+                            $("#" + taskId).find(".modal").addClass("complete");
+                            $("#" + taskId).find(".modal-footer").html("<p> Задание уже решено вашей командой </p>");
+                            $("#" + taskId).find(".error").text(res['message']);
+                            $("#" + taskId).find(".error").css("display", "block");
+
+                            //Исправление счета
+
+                            $("#score").text(res['score'] + " pts");
+
+                        }
+                    },
+                    error: function(){
+                        alert('Что-то пошло не так. Попробуйте позже');
+                    }
+                });
+                return false;
+            });
+
+        </script>
+

@@ -1,5 +1,8 @@
 <?php
 
+/* @var $task \app\models\Tasks|mixed */
+/* @var $this \yii\web\View */
+
 use app\models\OneTask;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
